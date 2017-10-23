@@ -6,32 +6,22 @@ var trip = require('../controllers/trips');
 router.get('/:id', function(req, res, next) {
   debug("Fetch trip %s",req.params.id);
   trip.fetch(req.params.id).then((trip) => {
-    res.json({
-      id: trip.id,
-      title: trip.title
-    });
+    trip: trip
   });
 });
 
 router.get('/:id/places', function(req, res, next) {
   trip.fetchRelatedPlaces(req.params.id).then((places) => {
     res.send({
-      places: places.map(place => ({
-          name: place.name,
-          summary: place.summary,
-          location : place.loc
-      })
-    )});
+      places: places
+    });
   });
 });
 
 router.get('/', function(req, res, next) {
   trip.fetchAll().then((trips) =>
     res.send({
-      trips: trips.map(trip => ({
-        id: trip.id,
-        title: trip.title
-      }))
+      trips: trips
     }));
 });
 

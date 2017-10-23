@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 // Define movie schema
 var placeSchema = new Schema({
-  relatedTrip: mongoose.Schema.Types.ObjectId,
+  trip: mongoose.Schema.Types.ObjectId,
   start: Date,
   end: Date,
   summary: String,
@@ -17,7 +17,7 @@ var placeSchema = new Schema({
 export const PlaceModel = mongoose.model('place', placeSchema);
 
 export const findByTripId = (id) => {
-  return PlaceModel.findAsync({relatedTrip:mongoose.Types.ObjectId(id)});
+  return PlaceModel.findAsync({trip:mongoose.Types.ObjectId(id)});
 };
 
 export const savePlace = (tripId, name, summary, lat, lng) => {

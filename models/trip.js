@@ -2,18 +2,22 @@ import mongoose, { Schema } from 'mongoose';
 
 // Define movie schema
 var tripSchema = new Schema({
-  id: {
+  title: String,
+  user : {
     type: mongoose.Schema.Types.ObjectId,
-    unique: true
-  },
-  title: String
+    ref: 'User'
+  }
 });
 
 // Export Mongoose model
-export const TripModel = mongoose.model('trip', tripSchema);
+export const TripModel = mongoose.model('Trip', tripSchema);
 
 export const findById = (id) => {
-  return TripModel.findOneAsync({id: id});
+  return TripModel.findOneAsync({_id: id});
+};
+
+export const findByUser = (userId) => {
+  return TripModel.findOneAsync({user: userId});
 };
 
 export const findAll = (max) => {

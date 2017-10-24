@@ -24,6 +24,7 @@ export const create = (title) => {
 
 /** Create a trip object from parameters */
 export const createRelatedPlace = (tripId, place) => {
+  console.log("save", place);
   return savePlace(tripId, place.name, place.summary, place.lat, place.lng);
 }
 

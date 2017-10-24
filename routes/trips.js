@@ -12,6 +12,7 @@ router.get('/:id', function(req, res, next) {
 
 router.get('/:id/places', function(req, res, next) {
   trip.fetchRelatedPlaces(req.params.id).then((places) => {
+    console.log("resu", places);
     res.send({
       places: places
     });

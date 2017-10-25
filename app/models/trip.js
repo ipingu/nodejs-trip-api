@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 // Define movie schema
 var tripSchema = new Schema({
-  title: String,
+  title: { type: String, required: true },
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -15,8 +15,8 @@ export const findTripById = (id) => {
   return TripModel.findOneAsync({_id: id});
 };
 
-export const findTripByUser = (userId) => {
-  return TripModel.findOneAsync({user: userId});
+export const findTripsByUser = (userId) => {
+  return TripModel.findAsync({user: userId});
 };
 
 export const findTrips = (max) => {

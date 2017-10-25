@@ -4,12 +4,13 @@ import mongoose, { Schema } from 'mongoose';
 var placeSchema = new Schema({
   trip : {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Trip'
+    ref: 'Trip',
+    required: true
   },
   start: Date,
   end: Date,
-  summary: String,
-  name: String,
+  summary: { type: String, required: true },
+  name: { type: String, required: true },
   loc: {
     type: [Number],
     index: '2d'
@@ -23,11 +24,13 @@ export const findPlacesByTripId = (id) => {
   return PlaceModel.findAsync({trip:mongoose.Types.ObjectId(id)});
 };
 
-export const savePlace = (tripId, name, summary, lat, lng) => {
+export const savePlace = (tripId, place) => {
   var entry = new PlaceModel({
     trip: mongoose.Types.ObjectId(tripId),
-    summary: summary,
-    name : name
+    summary: place.summary,
+    name : place.name,
+    start : place.start,
+    end: place.end
   });
 
   return entry.saveAsync(entry);

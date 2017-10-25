@@ -1,5 +1,5 @@
 const debug = require('debug')('app');
-import {findTripById, findTrips, saveTrip} from '../models/trip';
+import {findTripById, findTrips, findTripsByUser, saveTrip} from '../models/trip';
 import {findPlacesByTripId, savePlace} from '../models/place';
 import validator from 'validator';
 
@@ -7,8 +7,8 @@ export const getTripById = (id) => {
     return findTripById(id);
 }
 
-export const getTripForUser = (id) => {
-    return findTripByUser(id);
+export const getTripsByUser = (id) => {
+    return findTripsByUser(id);
 }
 
 export const getRecentTrips = () => {
@@ -16,7 +16,7 @@ export const getRecentTrips = () => {
 }
 
 export const savePlaceToTrip = (tripId, place) => {
-  return savePlace(tripId, place.name, place.summary, place.lat, place.lng);
+  return savePlace(tripId, place);
 }
 
 export const getPlacesForTrip = (id) => {

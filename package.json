@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SET PORT=3001 && SET DEBUG=app,backend-app:server && nodemon -- node_modules/babel-cli/bin/babel-node.js www"
+    "start": "SET PORT=3001 && SET DEBUG=app,backend-app:server && nodemon -- node_modules/babel-cli/bin/babel-node.js app/www"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

@@ -1,18 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const debug = require('debug')('app');
-var trip = require('../controllers/trips');
+var trips = require('../services/trips');
 
 router.get('/:id', function(req, res, next) {
-  debug("Fetch trip %s",req.params.id);
-  trip.fetch(req.params.id).then((trip) => {
+  trips.getTripById(req.params.id).then((trip) => {
     trip: trip
   });
 });
 
 router.get('/:id/places', function(req, res, next) {
-  trip.fetchRelatedPlaces(req.params.id).then((places) => {
-    console.log("resu", places);
+  trips.getPlacesForTrip(req.params.id).then((places) => {
     res.send({
       places: places
     });
@@ -20,19 +18,19 @@ router.get('/:id/places', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  trip.fetchAll().then((trips) =>
+  trips.getRecentTrips().then((trips) =>
     res.send({
       trips: trips
     }));
 });
 
 router.post('/:id/place', function(req, res, next) {
-  trip.createRelatedPlace(req.params.id, req.body).then((one) => res.json(one));
+  trips.savePlaceToTrip(req.params.id, req.body).then((one) => res.json(one));
 });
 
 
 router.post('/', function(req, res, next) {
-  trip.create(req.body.title).then((one) => res.json(one));
+  trips.createTrip(req.body.title).then((one) => res.json(one));
 });
 
 module.exports = router;

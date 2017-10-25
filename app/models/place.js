@@ -19,7 +19,7 @@ var placeSchema = new Schema({
 // Export Mongoose model
 export const PlaceModel = mongoose.model('place', placeSchema);
 
-export const findByTripId = (id) => {
+export const findPlacesByTripId = (id) => {
   return PlaceModel.findAsync({trip:mongoose.Types.ObjectId(id)});
 };
 

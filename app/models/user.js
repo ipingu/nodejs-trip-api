@@ -10,7 +10,7 @@ var userSchema = new Schema({
 // Export Mongoose model
 export const UserModel = mongoose.model('User', userSchema)
 
-export const save = (alias, email, location) => {
+export const saveUser = (alias, email, location) => {
   var entry = new UserModel({
     alias, email, location
   };

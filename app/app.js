@@ -10,8 +10,8 @@ bluebird.promisifyAll(mongoose);
 
 import morgan from 'morgan';
 
-var index = require('./routes/index');
-var trips = require('./routes/trips');
+var index = require('./routes/index.routes');
+var trips = require('./routes/trips.routes');
 
 mongoose.connect('mongodb://api:api42api@ds125255.mlab.com:25255/tale-us');
 

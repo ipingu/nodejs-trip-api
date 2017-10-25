@@ -9,22 +9,21 @@ var tripSchema = new Schema({
   }
 });
 
-// Export Mongoose model
 export const TripModel = mongoose.model('Trip', tripSchema);
 
-export const findById = (id) => {
+export const findTripById = (id) => {
   return TripModel.findOneAsync({_id: id});
 };
 
-export const findByUser = (userId) => {
+export const findTripByUser = (userId) => {
   return TripModel.findOneAsync({user: userId});
 };
 
-export const findAll = (max) => {
+export const findTrips = (max) => {
   return TripModel.findAsync();
 }
 
-export const save = (title) => {
+export const saveTrip = (title) => {
   var entry = new TripModel({id: new mongoose.Types.ObjectId(), title: title});
   return entry.saveAsync(entry);
 }

@@ -23,6 +23,6 @@ export const getPlacesForTrip = (id) => {
   return findPlacesByTripId(id);
 }
 
-export const createTrip = (title) => {
-    return saveTrip(title);
+export const createTrip = (trip) => {
+    return saveTrip(trip);
 }

@@ -17,7 +17,8 @@ var tripSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  places: [placeSchema]
+  places: [placeSchema],
+  summary: { type: String, required: false }
 });
 
 export const TripModel = mongoose.model("Trip", tripSchema);

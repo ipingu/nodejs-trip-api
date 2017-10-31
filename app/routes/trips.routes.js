@@ -34,7 +34,6 @@ router.post('/:id/place', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log("ER", req.body);
   trips.createTrip(req.body)
     .then(one => res.json(one))
     .catch(err => { next(err); });;

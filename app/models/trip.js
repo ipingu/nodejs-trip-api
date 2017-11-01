@@ -18,7 +18,9 @@ var tripSchema = new Schema({
     ref: "User"
   },
   places: [placeSchema],
-  summary: { type: String, required: false }
+  summary: { type: String, required: false },
+  start: Date,
+  end: Date
 });
 
 export const TripModel = mongoose.model("Trip", tripSchema);
@@ -32,7 +34,7 @@ export const findTripsByUser = userId => {
 };
 
 export const findTrips = max => {
-  return TripModel.findAsync();
+  return TripModel.find().sort("-start").execAsync();
 };
 
 export const savePlace = (tripId, place) => {

@@ -1,26 +1,32 @@
 import mongoose, { Schema } from "mongoose";
 
 var placeSchema = new Schema({
-  start: Date,
-  end: Date,
-  summary: { type: String, required: true },
-  name: { type: String, required: true },
-  loc: {
+  location: { type: String, required: true },
+  coord: {
     type: [Number],
     index: "2d"
-  }
-});
-
-var tripSchema = new Schema({
-  name: { type: String, required: true },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
   },
-  places: [placeSchema],
+  name: { type: String, required: false },
   summary: { type: String, required: false },
   start: Date,
   end: Date
+});
+
+var tripSchema = new Schema({
+  location: { type: String, required: true },
+  coord: {
+    type: [Number],
+    index: "2d"
+  },
+  name: { type: String, required: false },
+  summary: { type: String, required: false },
+  places: [placeSchema],
+  start: Date,
+  end: Date,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 export const TripModel = mongoose.model("Trip", tripSchema);
@@ -41,10 +47,7 @@ export const savePlace = (tripId, place) => {
   return findTripById(tripId).then(trip => {
     trip.places.push({
       trip: mongoose.Types.ObjectId(tripId),
-      summary: place.summary,
-      name: place.name,
-      start: place.start,
-      end: place.end
+      ...place
     });
 
     return trip.saveAsync();

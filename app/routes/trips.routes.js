@@ -28,13 +28,20 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/:id/place', function(req, res, next) {
-  trips.savePlaceToTrip(req.params.id, req.body)
+  let tripId = req.params.id;
+  let place = req.body;
+
+  debug("Update trip", tripId, " by adding place", place);
+  trips.savePlaceToTrip(tripId, place)
     .then(one => res.json(one))
     .catch(err => { next(err); });
 });
 
 router.post('/', function(req, res, next) {
-  trips.createTrip(req.body)
+  let trip = req.body;
+
+  debug("Create trip", trip);
+  trips.createTrip(trip)
     .then(one => res.json(one))
     .catch(err => { next(err); });;
 });
